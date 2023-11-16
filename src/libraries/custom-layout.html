@@ -1,0 +1,145 @@
+<content id="data-content">
+    <style>
+        .template--defaultList .template--listItem{
+            margin-bottom: 20px;
+        }
+        .thumbnail--image img{
+            border-radius: 3px;
+        }
+        .example-themePrimary a {
+            color: {
+                {
+                    @root.theme.palette.themePrimary
+                }
+            }
+        }
+        {
+            {
+                #unless @root.properties.layoutProperties.showItemThumbnail
+            }
+        }
+        .template--listItem--icon{
+            height: 32px;
+            width: 32px;
+            margin-right: 15px;
+        }
+        .template--listItem--author{
+            padding-right: 10px;
+        }
+        
+        .template--listItem--result {
+            flex-basis: 100%!important;
+        }
+
+        .placeholder--defaultList, .template--defaultList {
+            padding: 0;
+        }
+        .template--listItem--icon{
+            display: -ms-flexbox;
+            display: flex;
+            outline: 0;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+            -ms-flex-wrap: wrap-reverse;
+            flex-wrap: wrap-reverse;
+        }
+        .placeholder--defaultList .template--listItem, .placeholder--defaultList .template--peopleListItem, .template--defaultList .template--listItem, .template--defaultList .template--peopleListItem {
+            display: -ms-flexbox;
+            display: flex;
+            padding: 10px;
+            outline: 0;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+            -ms-flex-wrap: wrap-reverse;
+            flex-wrap: wrap-reverse;
+        }
+        .placeholder--defaultList .template--listItem--result, .template--defaultList .template--listItem--result {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-positive: 0;
+            flex-grow: 0;
+            -ms-flex-negative: 1;
+            flex-shrink: 1;
+            -ms-flex-preferred-size: 74%;
+            flex-basis: 74%;
+            max-width: 74%;
+            word-break: break-word;
+            overflow: hidden;
+        }
+        .placeholder--defaultList .template--listItem--contentContainer, .template--defaultList .template--listItem--contentContainer {
+            display: -ms-flexbox;
+            display: flex;
+            width: 100%;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            margin-right: 15px;
+        }
+    </style>
+
+    <div class="template_root">
+        <div class="template--header">
+            {{#if @root.properties.showResultsCount}}
+                <div class="template--resultCount">
+                    <label class="ms-fontWeight-semibold">{{getCountMessage @root.data.totalItemsCount @root.inputQueryText}}</label>
+                </div>
+            {{/if}}
+
+            <div class="template--sort">
+                <pnp-sortfield 
+                    data-fields="{{JSONstringify @root.properties.dataSourceProperties.sortList}}" 
+                    data-default-selected-field="{{sort.selectedSortFieldName}}" 
+                    data-default-direction="{{sort.selectedSortDirection}}"
+                    data-theme-variant="{{JSONstringify @root.theme}}">
+                </pnp-sortfield>    
+            </div>
+        </div>
+
+        <my-custom-component data-pages="{{JSONstringify @root.data}}"></my-custom-component>
+    </div>
+
+    {{#if @root.properties.paging.showPaging}}
+        <pnp-pagination
+            data-total-items="{{@root.data.totalItemsCount}}"
+            data-hide-first-last-pages="{{@root.properties.paging.hideFirstLastPages}}"
+            data-hide-disabled="{{@root.properties.paging.hideDisabled}}"
+            data-hide-navigation="{{@root.properties.paging.hideNavigation}}"
+            data-range="{{@root.properties.paging.pagingRange}}"
+            data-items-count-per-page="{{@root.properties.paging.itemsCountPerPage}}"
+            data-current-page-number="{{@root.paging.currentPageNumber}}"
+        >
+        </pnp-pagination>
+    {{/if}}
+
+</content>
+
+<content id="placeholder-content">
+    <style>
+        /* Insert your CSS overrides here */
+    </style>
+
+    <div class="placeholder_root">
+        <ul class="template_defaultList">
+            {{#times 3}}   
+                <li class="template_listItem" tabindex="0">
+                    <div class="template_result">
+                            <div class="template_icon shimmer"></div>
+                            <div class="template_contentContainer">
+                                <span class="shimmer line" style="width: 60%"></span>
+                                <span class="shimmer line" style="width: 100%"></span>
+                                <span class="shimmer line" style="width: 100%"></span>
+                                <span class="shimmer line" style="width: 35%"></span>
+                                <span class="shimmer line" style="width: 20%"></span>                       
+                            </div>
+                    </div>
+                    <div class="template_previewContainer ms-hiddenSm">
+                        <div class="doc-container">
+                            <div class="img-container">
+                                <div class="shimmer img-preview" style="width: 120px;height: 70px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            {{/times}}
+        </ul>
+    </div>
+</content>
